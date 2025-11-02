@@ -93,6 +93,48 @@ const ChatbotUtils = {
     },
 
     /**
+     * Create order tracking card element
+     */
+    createOrderTrackingCard(orderData) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'bot');
+
+        const trackingCard = document.createElement('div');
+        trackingCard.classList.add('order-tracking-card');
+        
+        let stepsHtml = '';
+        orderData.steps.forEach((step, index) => {
+            const status = step.status || 'pending';
+            const iconClass = step.icon || 'fa-circle';
+            const label = step.label || 'Step';
+            const date = step.date || '';
+            
+            stepsHtml += `
+                <div class="tracking-step ${status}">
+                    <div class="step-icon">
+                        <i class="fas ${iconClass}"></i>
+                    </div>
+                    <div class="step-content">
+                        <span class="step-label">${label}</span>
+                        ${date ? `<span class="step-date">${date}</span>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        trackingCard.innerHTML = `
+            <div class="order-id">Order ID</div>
+            <div class="order-number">#${orderData.orderNumber || 'ORD-00000'}</div>
+            <div class="tracking-steps">
+                ${stepsHtml}
+            </div>
+        `;
+
+        messageDiv.appendChild(trackingCard);
+        return messageDiv;
+    },
+
+    /**
      * Get fallback response based on message content
      */
     getFallbackResponse(message, config) {
