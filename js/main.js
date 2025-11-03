@@ -33,7 +33,6 @@ class DAIKOChatbot {
      * Initialize the chatbot
      */
     init() {
-        this.createTypingIndicator();
         this.setupEventListeners();
         this.setupQuickActions();
         this.setupKeyboardShortcuts();
@@ -229,9 +228,8 @@ class DAIKOChatbot {
 
         // Clear existing messages
         this.elements.chatMessages.innerHTML = '';
-        // Recreate typing indicator after clearing
-        this.createTypingIndicator();
-        this.elements.typingIndicator.style.display = 'none';
+        // Reset typing indicator reference
+        this.elements.typingIndicator = null;
 
         // Load messages with delay for realistic effect
         scenario.forEach((msg, index) => {
@@ -405,10 +403,9 @@ class DAIKOChatbot {
      * Show typing indicator
      */
     showTypingIndicator() {
-        // Ensure element exists
+        // Create indicator if it doesn't exist
         if (!this.elements.typingIndicator) {
-            console.error('Typing indicator element not found');
-            return;
+            this.createTypingIndicator();
         }
         
         // Force display using inline style and class
