@@ -1,6 +1,7 @@
 # DAIKO Électroménager Chatbot
 
 Un chatbot moderne et élégant pour le site web DAIKO Électroménager, conçu avec les couleurs de la marque DAIKO et structuré de manière modulaire pour une maintenance facile.
+![DAIKO Chatbot Screenshot](image.png)
 
 ## 🎨 Caractéristiques
 
